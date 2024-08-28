@@ -960,7 +960,10 @@ footer .copywrite
 
 
 
-
+img.logo{
+    width: 200px;
+    margin-left:-4.5rem ;
+}
 
 
 
@@ -1065,6 +1068,7 @@ footer .copywrite
     #hedear {
         padding: 10px 30px; 
     }
+    
     #hero {
         padding: 0 20px;
         background-repeat: 55%;
@@ -1197,8 +1201,8 @@ footer .copywrite
         width: 100%;
         padding: 20px;
     }
-}
-img.logo{
-    width: 200px;
-    margin-left:-4.5rem ;
+    img.logo{
+        width: 160px;
+        margin-left:-2.9rem ;
+    }
 }
