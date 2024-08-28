@@ -235,7 +235,7 @@ btn.addEventListener("click", async function () {
     const token = localStorage.getItem("token");
     const conf = confirm("Do you want to proceed to checkout?");
     if (!token && conf) {
-        window.location.href = '/login';
+        window.location.href = '../client/login';
         return;
     }
 });
