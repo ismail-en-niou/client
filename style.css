@@ -446,12 +446,13 @@ footer .col
 
    
 }
-.logo{
+img.logo{
     width: 50px;
 }
 footer .logo
 {
     margin-bottom: 30px;
+    width: 50px;
 }
 footer h4
 {
