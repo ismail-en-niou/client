@@ -1,5 +1,5 @@
 
-        async function fetchProducts() {
+async function fetchProducts() {
     try {
         // Fetch products from both API endpoints
         const response1 = await fetch("https://electro-api.robixe.online/products", {
