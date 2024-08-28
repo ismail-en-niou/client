@@ -446,13 +446,11 @@ footer .col
 
    
 }
-img.logo{
-    width: 50px;
-}
+
 footer .logo
 {
     margin-bottom: 30px;
-    width: 50px;
+
 }
 footer h4
 {
@@ -1198,4 +1196,7 @@ footer .copywrite
         width: 100%;
         padding: 20px;
     }
+}
+img.logo{
+    width: 50px;
 }
