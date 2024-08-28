@@ -1,7 +1,13 @@
 document.addEventListener('DOMContentLoaded', async function () {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
+    document.addEventListener('change', (event) => {
+        if (event.target.matches('input[type="number"]') && event.target.value < 100 && event.target.value > 0) {
+            const productId = event.target.id.split('-')[1];
+            const newQuantity = event.target.value;
 
+        }
+    })
     if (!productId) {
         console.error("Product ID is missing.");
         return;
@@ -42,38 +48,38 @@ document.addEventListener('DOMContentLoaded', async function () {
         const btn = document.getElementById("normal");
         const num = document.querySelector('input[type="number"]');
         btn.addEventListener("click", async function () {
-            const conf = confirm(`you want to add that product ${product.name}`);
-            if (num <0)
-            {
-                const conf1 = confirm(`you want to add that product ${product.name}`);
-                if (conf1)
-                    return;
-            }
-            if (conf) {
-                const productQuantity = document.querySelector('input[type="number"]').value;
-                
-                num.value = 1;
-                let sells = JSON.parse(localStorage.getItem("sells")) || [];
+            if (num.value > 0 && num.value < 50) {
 
-                const data = {
-                    productId: productId,
-                    productQuantity: productQuantity
-                };
-                sells.push(data);
-                localStorage.setItem("sells", JSON.stringify(sells));
+                const conf = confirm("add succesfly");
+                if (conf) {
+                    const productQuantity = document.querySelector('input[type="number"]').value;
+
+                    num.value = 1;
+                    let sells = JSON.parse(localStorage.getItem("sells")) || [];
+
+                    const data = {
+                        productId: productId,
+                        productQuantity: productQuantity
+                    };
+                    sells.push(data);
+                    localStorage.setItem("sells", JSON.stringify(sells));
+                }
+
+            } else {
+                confirm("this not a good quantite")
             }
 
             if (token) {
                 try {
                     // Retrieve and parse the sells data from localStorage
                     let sells = JSON.parse(localStorage.getItem("sells")) || [];
-            
+
                     // Transform the array into an object with productId as keys and productQuantity as values
                     const cart = sells.reduce((acc, item) => {
                         acc[item.productId] = Number(item.productQuantity);
                         return acc;
                     }, {});
-            
+
                     // Send the transformed data to the API
                     const response = await fetch('https://electro-api.robixe.online/cart', {
                         method: 'POST',
@@ -85,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                             cart: cart
                         })
                     });
-            
+
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
 
@@ -94,10 +100,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                     console.error("Error adding product to cart:", error);
                 }
             }
-            
+
         });
     } catch (error) {
         console.error("Error fetching product details:", error);
     }
 });
-

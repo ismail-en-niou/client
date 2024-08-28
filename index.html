@@ -13,7 +13,7 @@
 <body>
     <!-- section number 1 -->
     <section id="hedear">
-        <a href="#"><img src="images/banner/logo.png" class="logo"></a>
+        <a href="#"><img loading="lazy" src="images/banner/logo.png" class="logo"></a>
         <div>
             <ul id="navbar">
                 <li><a class="active" href="index.html">Home</a></li>
@@ -35,27 +35,27 @@
     </section>
     <section id="feature" class="section-p1">
         <div class="fe-box">
-            <img src="images/f1.png" alt="">
+            <img loading="lazy" src="images/f1.png" alt="">
             <h6>Free Shipping</h6>
         </div>
         <div class="fe-box">
-            <img src="images/f2.png" alt="">
+            <img loading="lazy" src="images/f2.png" alt="">
             <h6>Online Order</h6>
         </div>
         <div class="fe-box">
-            <img src="images/f3.png" alt="">
+            <img loading="lazy" src="images/f3.png" alt="">
             <h6>Save Money</h6>
         </div>
         <div class="fe-box">
-            <img src="images/f4.png" alt="">
+            <img loading="lazy" src="images/f4.png" alt="">
             <h6>Promotions</h6>
         </div>
         <div class="fe-box">
-            <img src="images/f5.png" alt="">
+            <img loading="lazy" src="images/f5.png" alt="">
             <h6>Happy Sell</h6>
         </div>
         <div class="fe-box">
-            <img src="images/f6.png" alt="">
+            <img loading="lazy" src="images/f6.png" alt="">
             <h6>24/7 Suport</h6>
         </div>
     </section>
@@ -121,19 +121,19 @@
     </section>
     <footer class="section-p1">
         <div class="col">
-            <img class="logo" src="images/banner/logo.png" alt="">
+            <img class="logo" src="../images/banner/logo.png" alt="" loading="lazy">
             <h4>Contact</h4>
-            <p>address : test </p>
+            <p>address : BENI SAID BOUAMAR, Tanger 90102 </p>
             <p><strong>Phone:</strong> +212 606150343</p>
             <p><strong>Hours:</strong> 10:00 - 18:00 , Mon - sat</p>
             <div class="follow">
                 <h4>Folow Us</h4>
                 <div class="icon">
                     <i class='bx bxl-facebook'></i>
-                    <i class='bx bxl-twitter' ></i>
-                    <i class='bx bxl-instagram' ></i>
-                    <i class='bx bxl-pinterest-alt' ></i>
-                    <i class='bx bxl-youtube' ></i>
+                    <i class='bx bxl-twitter'></i>
+                    <i class='bx bxl-instagram'></i>
+                    <i class='bx bxl-pinterest-alt'></i>
+                    <i class='bx bxl-youtube'></i>
                 </div>
             </div>
         </div>
@@ -157,149 +157,18 @@
             <h4>Install App</h4>
             <p>From App Store or Gooogle Play</p>
             <div class="row">
-                <img src="images/pay/play.jpg" alt="">
-                <img src="images/pay/app.jpg" alt="">
+                <img  loading="lazy"src="../images/pay/play.jpg" alt="">
+                <img loading="lazy" src="../images/pay/app.jpg" alt="">
             </div>
             <p>Secured Payment Gateways</p>
-            <img src="images/pay/pay.png" alt="">
+            <img loading="lazy" src="../images/pay/pay.png" alt="">
         </div>
         <div class="copywrite">
-            <p>© 2023, electroelbakali - Ecommerce Template </p>
+            <p>© 2024, electroelbakali - dev by ismail-eniou </p>
         </div>
     </footer>
     <script src="script.js"></script>
-    <script>
-async function fetchProducts() {
-    try {
-        if (!localStorage.getItem("sells"))
-        {
-            localStorage.setItem("sells",null);
-        }
-        const response1 = await fetch("https://electro-api.robixe.online/products/TV", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-        const response2 = await fetch("https://electro-api.robixe.online/products/RF", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-
-        // Check if both responses are OK
-        if (!response1.ok) {
-            throw new Error(`HTTP error! Status: ${response1.status}`);
-        }
-        if (!response2.ok) {
-            throw new Error(`HTTP error! Status: ${response2.status}`);
-        }
-
-        // Parse JSON data from both responses
-        const data1 = await response1.json();
-        const data2 = await response2.json();
-
-        // Check if the products exist in the responses
-        if (data1.products && data1.products.length > 0) {
-            displayProducts(data1.products, 'pro-container1');
-        } else {
-            console.error("No products found in the first API response.");
-        }
-
-        if (data2.products && data2.products.length > 0) {
-            displayProducts(data2.products, 'pro-container2');
-        } else {
-            console.error("No products found in the second API response.");
-        }
-
-    } catch (error) {
-        console.error("Error fetching products:", error);
-    }
-}
-
-// Function to create star elements
-function createStars(rating) {
-    let stars = '';
-    for (let i = 0; i < 5; i++) {
-        if (i < rating) {
-            stars += "<i class='bx bxs-star'></i>";
-        } else {
-            stars += "<i class='bx bx-star'></i>";
-        }
-    }
-    return stars;
-}
-
-// Function to create a product element
-function createProduct(product) {
-    return `
-<div class="pro">
-    <a href="/spro/sproduct.html?id=${product.id}" style="text-decoration: none;">
-        <img src="https://electro-api.robixe.online/image/${product.img}" alt="${product.name}">
-        <div class="des">
-            <span>${product.company}</span>
-            <h4>${product.name}</h4>
-            <p>${product.description}</p>
-            <div class="star">
-                ${createStars(product.stars)}
-            </div>
-            <h4>${product.price}0Dh</h4>
-        </div>
-    </a>
-    <a href="#"><i class='bx bxs-shopping-bag-alt cart'></i></a>
-</div>
-`;
-}
-
-// Function to display products in a specific container
-function displayProducts(products, containerId) {
-    const container = document.getElementById(containerId);
-    if (container) {
-        container.innerHTML = ''; // Clear previous content
-        products.forEach(product => {
-            container.innerHTML += createProduct(product);
-        });
-    } else {
-        console.error(`Container with ID '${containerId}' not found.`);
-    }
-}
-
-async function fetchallProducts() {
-    try {
-        // Fetch products from both API endpoints
-        const response1 = await fetch("https://electro-api.robixe.online/products", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
-
-        // Check if both responses are OK
-        if (!response1.ok) {
-            throw new Error(`HTTP error! Status: ${response1.status}`);
-        }
-        
-
-        // Parse JSON data from both responses
-        const data1 = await response1.json();
-        localStorage.setItem("allproduct",JSON.stringify(data1));
-        // Check if the products exist in the responses
-        if (data1.products && data1.products.length > 0) {
-            displayProducts(data1.products, 'pro-container1');
-        } else {
-            console.error("No products found in the first API response.");
-        }
-
-    } catch (error) {
-        console.error("Error fetching products:", error);
-    }
-}
-
-fetchallProducts();
-window.onload = fetchProducts;
-
-    </script>
+    <script src="fetch.js"></script>
 
 </body>
 
