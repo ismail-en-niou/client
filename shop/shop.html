@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>electro.robixe</title>
+</head>
+<body>
+    <!-- section number 1 -->
+    <section id="hedear">
+        <a href="#"><img src="../images/banner/logo.png" class="logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><a  href="../">Home</a></li>
+                <li><a class="active"  href="/shop/shop.html">Shop</a></li>
+                <li><a href="/about/about.html">About</a></li>
+                <li><a href="/contact/contact.html">Contact</a></li>
+                <li id="lg-bag"><a href="../cart/cart.html"><i class='bx bx-shopping-bag'></i></a></li>
+                <a href="#" id="close"><i class='bx bx-x-circle'></i></a>
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class='bx bx-shopping-bag'></i></a>
+            <i id="bar" class='bx bx-menu'></i>
+        </div>
+    </section>
+    <!-- section number 2 -->
+    <section id="page-header">
+
+     <h2>#TRUE_LOVE</h2>
+ 
+     <p>save  more whit coupons & up to 70% off!</p>
+    </section>
+
+
+    <section id="product1" class="section-p1">
+        <p>Collection New Modern Design</p>
+        <div class="pro-container" id="pro-container1"></div>
+    </section>
+    <section id="newslettre" class="section-p1 section-m1">
+        <div class="newtext">
+            <h4>Sing Up For Newsletters</h4>
+            <p>Get E-mail udates about our latest shop and <span>special offers.</span></p>
+        </div>
+        <div class="form">
+            <input type="text" placeholder="your email address">
+            <button class="normal"> Sign Up </button>
+        </div>
+    </section>
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="../images/banner/logo.png" alt="">
+            <h4>Contact</h4>
+            <p>address : test </p>
+            <p><strong>Phone:</strong> +212 606150343</p>
+            <p><strong>Hours:</strong> 10:00 - 18:00 , Mon - sat</p>
+            <div class="follow">
+                <h4>Folow Us</h4>
+                <div class="icon">
+                    <i class='bx bxl-facebook'></i>
+                    <i class='bx bxl-twitter' ></i>
+                    <i class='bx bxl-instagram' ></i>
+                    <i class='bx bxl-pinterest-alt' ></i>
+                    <i class='bx bxl-youtube' ></i>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About Us</a>
+            <a href="#">Delivery Infomation </a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & condition</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sing in </a>
+            <a href="#">Views cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Gooogle Play</p>
+            <div class="row">
+                <img src="../images/pay/play.jpg" alt="">
+                <img src="../images/pay/app.jpg" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="../images/pay/pay.png" alt="">
+        </div>
+        <div class="copywrite">
+            <p>© 2023, electroelbakali - Ecommerce Template </p>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+    <script>
+        async function fetchProducts() {
+    try {
+        // Fetch products from both API endpoints
+        const response1 = await fetch("https://electro-api.robixe.online/products", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        // Check if both responses are OK
+        if (!response1.ok) {
+            throw new Error(`HTTP error! Status: ${response1.status}`);
+        }
+        
+
+        // Parse JSON data from both responses
+        const data1 = await response1.json();
+        localStorage.setItem("allproduct",JSON.stringify(data1));
+        // Check if the products exist in the responses
+        if (data1.products && data1.products.length > 0) {
+            displayProducts(data1.products, 'pro-container1');
+        } else {
+            console.error("No products found in the first API response.");
+        }
+
+    } catch (error) {
+        console.error("Error fetching products:", error);
+    }
+}
+
+// Function to create star elements
+function createStars(rating) {
+    let stars = '';
+    for (let i = 0; i < 5; i++) {
+        if (i < rating) {
+            stars += "<i class='bx bxs-star'></i>";
+        } else {
+            stars += "<i class='bx bx-star'></i>";
+        }
+    }
+    return stars;
+}
+
+// Function to create a product element
+function createProduct(product) {
+    return `
+<div class="pro">
+    <a href="../spro/sproduct.html?id=${product.id}" style="text-decoration: none;">
+        <img src="https://electro-api.robixe.online/image/${product.img}" alt="${product.name}">
+        <div class="des">
+            <span>${product.company}</span>
+            <h4>${product.name}</h4>
+            <p>${product.description}</p>
+            <div class="star">
+                ${createStars(product.stars)}
+            </div>
+            <h4>${product.price * 10}Dh</h4>
+        </div>
+    </a>
+    <a href="#"><i class='bx bxs-shopping-bag-alt cart'></i></a>
+</div>
+`;
+}
+
+// Function to display products in a specific container
+function displayProducts(products, containerId) {
+    const container = document.getElementById(containerId);
+    if (container) {
+        container.innerHTML = ''; // Clear previous content
+        products.forEach(product => {
+            container.innerHTML += createProduct(product);
+        });
+    } else {
+        console.error(`Container with ID '${containerId}' not found.`);
+    }
+}
+
+window.onload = fetchProducts;
+    </script>
+</body>
+</html>
