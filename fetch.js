@@ -63,7 +63,7 @@ function createStars(rating) {
 function createProduct(product) {
     return `
 <div class="pro">
-    <a href="/spro/sproduct.html?id=${product.id}" style="text-decoration: none;">
+    <a href="/client/spro/sproduct.html?id=${product.id}" style="text-decoration: none;">
         <img src="https://electro-api.robixe.online/image/${product.img}" alt="${product.name}">
         <div class="des">
             <span>${product.company}</span>
